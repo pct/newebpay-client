@@ -49,7 +49,7 @@ module Newebpay
         Version: '1.1',
         MerchantOrderNo: @order_number,
         Amt: @amount.to_i,
-        TimeStamp: Time.now.to_i.to_s,
+        TimeStamp: Time.current.to_i.to_s, # 使用 Time.current (rails 設定的時區)
         IndexType: 1,
         CloseType: 2
       }

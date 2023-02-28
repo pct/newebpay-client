@@ -50,7 +50,7 @@ module Newebpay
         MerchantOrderNo: @order_number,
         Amt: @amount.to_i,
         ItemDesc: @product_description,
-        TimeStamp: Time.now.to_i.to_s,
+        TimeStamp: Time.current.to_i.to_s, # 使用 Time.current (rails 設定的時區)
         OrderComment: @order_comment,
         Email: @email
       }

@@ -94,10 +94,10 @@ module Newebpay
   end
 end
 
-#其他應自行變動的 TradeInfo 參數
-# TimeStamp 時間戳記
-# MerchantOrderNo 商店訂單編號
-# Amt 訂單金額
-# ItemDesc 商品資訊
-# Email 付款人電子信箱
-# OrderComment 商店備註
+# 其他應自行變動的 TradeInfo 參數
+# - TimeStamp 時間戳記
+# - MerchantOrderNo 商店訂單編號
+# - Amt 訂單金額
+# - ItemDesc 商品資訊
+# - Email 付款人電子信箱
+# - OrderComment 商店備註
