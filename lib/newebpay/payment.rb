@@ -22,17 +22,19 @@ module Newebpay
       @amount = amount
       @email = email
       @product_description = product_description
+
       set_trade_info
+
       @aes_trade_info = AES::Cryptographic.new(url_encoded_trade_info).encrypt
       @sha256_trade_info = SHA256::Cryptographic.new(@aes_trade_info).encrypt
     end
 
     def required_parameters
       {
-        MerchantID: Config.options[:MerchantID],
-        TradeInfo: @aes_trade_info,
-        TradeSha: @sha256_trade_info,
-        Version: Config.options[:Version]
+        MerchantID: Config.options[:MerchantID], # 商店 ID
+        TradeInfo: @aes_trade_info, # AES 加密過的 trade info
+        TradeSha: @sha256_trade_info, # sha256 加密過的 trade info
+        Version: Config.options[:Version] # 藍新金流版本號
       }
     end
 
@@ -47,12 +49,12 @@ module Newebpay
       @trade_info = options.transform_keys(&:to_sym)
 
       individual_trade_info = {
-        MerchantOrderNo: @order_number,
-        Amt: @amount.to_i,
-        ItemDesc: @product_description,
+        MerchantOrderNo: @order_number, # 商店訂單編號，如：用途_日期時間戳記_流水號
+        Amt: @amount.to_i, # 訂單金額
+        ItemDesc: @product_description, # 商品資訊 (50 字內)
         TimeStamp: Time.current.to_i.to_s, # 使用 Time.current (rails 設定的時區)
-        OrderComment: @order_comment,
-        Email: @email
+        OrderComment: @order_comment, # 商店備註 (300字內，亦會在藍新頁面出現)
+        Email: @email # 用戶的 Email
       }
 
       @trade_info.merge!(individual_trade_info)
