@@ -1,11 +1,19 @@
 # frozen_string_literal: true
 
+# for mattr_accessor
+require 'active_support/core_ext/module/attribute_accessors'
+
+# for with_indifferent_access
+require 'active_support/core_ext/hash/indifferent_access'
+
 module Newebpay
+
   module Config
     mattr_accessor :options
+    mattr_accessor :production_mode # 0/1，預設為 0，使用開發環境網址
+    mattr_accessor :api_base_url # 依據 production_mode 設定 api 網址
 
     OPTIONS = %w[
-      ProductionMode
       MerchantID
       HashKey
       HashIV
@@ -44,7 +52,6 @@ module Newebpay
 
     # TradeInfo 參數
     MAPPING_TABLE = {
-      ProductionMode: 'production_mode', # 此 gem 獨有 (0/1，預設為 0，使用開發環境網址) 
       MerchantID: 'merchant_id', # 商店代號
       HashKey: 'hash_key', # 商店專屬 HashKey
       HashIV: 'hash_iv', # 商店專屬 HashIV
@@ -92,6 +99,11 @@ module Newebpay
 
     def configure
       yield self
+    end
+
+    def api_base_url
+      self.production_mode ||= 0
+      self.api_base_url = self.production_mode == 0 ? 'https://ccore.newebpay.com' : 'https://core.newebpay.com'
     end
   end
 end
