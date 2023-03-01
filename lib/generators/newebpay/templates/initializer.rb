@@ -5,13 +5,16 @@ Newebpay.configure do |config|
   # 必要參數
   # ========
 
+  # (0/1 使用藍新正式站與否，預設為 0 測試站)
+  config.production_mode = 0
+
   # Puts your MerchantID/HashKey/HashIV in environment variable
   # 商店代號
   config.merchant_id = nil 
 
   # 串接金鑰
-  config.hash_key   = nil 
-  config.hash_iv     = nil
+  config.hash_key = nil 
+  config.hash_iv = nil
 
   # 回傳格式 (此 gem 僅支援 JSON)
   config.respond_type = 'JSON'
@@ -22,9 +25,9 @@ Newebpay.configure do |config|
   # 0 = No login required for newebpay, 1 = Must login to newebpay
   config.login_type = 0
 
-  # ====================
-  # non-required parameters
-  # ====================
+  # ========
+  # 其他參數
+  # ========
 
   # The default language is zh-tw, you can also change it to en or jp
   # config.lang_type = ''

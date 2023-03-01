@@ -1,8 +1,8 @@
-require_relative 'lib/newebpay/client/version'
+require_relative 'lib/newebpay/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "newebpay-client"
-  spec.version       = Newebpay::Client::VERSION
+  spec.version       = Newebpay::VERSION
   spec.authors       = ["Daniel Lin (pct)"]
   spec.email         = ["pct@4point-inc.com"]
 
@@ -29,4 +29,5 @@ Gem::Specification.new do |spec|
 
   # 相依套件
   spec.add_dependency "faraday"
+  spec.add_runtime_dependency "activesupport", [">= 4.0"]
 end
