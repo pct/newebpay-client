@@ -31,10 +31,12 @@ $ rails generate newebpay:install
 
 設定 `config/initializers/newebpay.rb`：
 
+```
 - config.production_mode # 0: 開發環境 / 1: 正式站，預設為 0
 - config.marchant_id # 商店 ID
 - config.hash_key
 - config.hash_iv
+```
 
 ## Usage
 
