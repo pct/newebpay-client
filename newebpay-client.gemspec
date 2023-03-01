@@ -28,6 +28,5 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   # 相依套件
-  spec.add_dependency "faraday"
   spec.add_runtime_dependency "activesupport", [">= 4.0"]
 end
