@@ -77,6 +77,10 @@ The gem is available as open source under the terms of the [MIT License](https:/
 - 捐款平台
 
 
+## 註冊藍新帳號
+- [正式站] https://www.newebpay.com/
+- [測試站] https://cwww.newebpay.com/
+
 ## 參考資料
 
 此套件寫法參考了 github 上面 ruby, php, .net 等相關的 newebpay/spgateway 套件細節，以及感謝 ChatGPT 的 ruby gem 撰寫教學
@@ -86,3 +90,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 - [cellvinchung/newebpay-rails](https://github.com/cellvinchung/newebpay-rails)
 - [calvertyang/spgateway](https://github.com/calvertyang/spgateway)
 - [ZneuRay/spgateway_rails](https://github.com/ZneuRay/spgateway_rails)
+
