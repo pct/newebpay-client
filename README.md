@@ -4,24 +4,38 @@
 
 目前狀態為`開發中`，請優先使用別的 newebpay 相關 gem 來達到您的需求(比如文末的參考資料)。
 
-## 對應藍新金流 API 版本 MPG 2.0，文件版本號 NDNF-1.0.6
-- https://www.newebpay.com/website/Page/download_file?name=Online%20Payment-Foreground%20Scenario%20API%20Specification_NDNF-1.0.6.pdf
+## 藍新金流 API
+- [信用卡定期定額 API 1.5 ](https://www.newebpay.com/website/Page/content/download_api)
+- [線上交易─幕前支付 API 2.0](https://www.newebpay.com/website/Page/content/download_api)
+- [捐款平台 API 1.1](https://donation.newebpay.com/Info/Help_center/download)
 
-## Installation
+## 安裝
 
-Add this line to your application's Gemfile:
+Gemfile：
 
 ```ruby
 gem 'newebpay-client'
 ```
 
-And then execute:
+執行：
 
-    $ bundle install
+```bash
+$ bundle install
+```
 
-Or install it yourself as:
+建立 `config/initializers/newebpay.rb`：
 
-    $ gem install newebpay-client
+```bash
+$ rails generate newebpay:install
+```
+
+設定 `config/initializers/newebpay.rb`：
+
+- config.production_mode # 0/1 (開發環境/正式站)
+- config.marchant_id # 商店 ID
+- config.hash_key
+- config.hash_iv
+
 
 ## Usage
 
@@ -44,21 +58,30 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 
 ## TODO
-- 一堆
-- 
-- 
-- 
-- 
+### 線上交易─幕前支付 
+- MPG交易(多功能收款) [NPA-F01] `/MPG/mpg_gateway`
+- 單筆交易查詢 [NPA-B02] `/API/QueryTradeInfo`
+- 信用卡取消授權 [NPA-B01] `/API/CreditCard/Cancel`
+- 信用卡請款/退款、取消請款/取消退款 [NPA-B031 ~ 34] `/API/CreditCard/Close`
+- 電子錢包退款 [NPA-B06] `/API/EWallet/refund`
+
+### 信用卡定期定額
+- 建立委託 [NPA-B05] `/MPG/period`
+- 回應參數-每期授權完成 [NPA-N050]
+- 修改委託狀態 [NPA-B051] `/MPG/period/AlterStatus`
+- 修改委託內容 [NPA-B052] `/MPG/period/AlterAmt` (可更動委託金額)
+
+
+### 捐款平台
+- 捐款平台
 
 
 ## 參考資料
 
-此套件寫法參考了 github 上面 ruby, php, .net 等相關的 newebpay/spgateway 套件，以及感謝 ChatGPT 的 ruby gem 撰寫教學
+此套件寫法參考了 github 上面 ruby, php, .net 等相關的 newebpay/spgateway 套件細節，以及感謝 ChatGPT 的 ruby gem 撰寫教學
 
-感謝這些相關套件：
+特別感謝這些相關套件：
 - 5xTraining/newebpay-turbo (最主要架構與程式碼，從這邊 clone 與改寫)
 - cellvinchung/newebpay-rails
-- lumir1031/newebpay_demo
 - calvertyang/spgateway
-- 5xRuby/spgateway-rails
 - ZneuRay/spgateway_rails
