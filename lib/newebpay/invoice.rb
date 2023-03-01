@@ -21,12 +21,14 @@ module Newebpay
       @order_number = order_number
       @amount = amount
       @cancel = cancel
+
       set_invoice_info
+
       @post_data = AES::Cryptographic.new(url_encoded_invoice_info).encrypt
     end
 
     def request!
-      uri = URI('https://ccore.newebpay.com/API/CreditCard/Close')
+      uri = URI("#{Config.api_base_url}/API/CreditCard/Close")
       res = Net::HTTP.post_form(uri, MerchantID_: Config.options[:MerchantID], PostData_: @post_data)
       @response = JSON.parse(res.body)
     end
