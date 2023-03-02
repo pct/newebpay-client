@@ -62,9 +62,11 @@ module Newebpay
     def set_trade_info
       # 變數順序不能變，要作為 check_value
       @trade_info = {
+        IV: Config.options[HashIV],
         Amt: @amount.to_i,
         MerchantID: Config.options[:MerchantID],
-        MerchantOrderNo: @order_number
+        MerchantOrderNo: @order_number,
+        Key: Config.options[HashKey]
       }
     end
 
