@@ -17,6 +17,7 @@ module Newebpay
 
       @key = Config.options[:HashKey]
       @iv = Config.options[:HashIV]
+
       @order_number = order_number
       @order_comment = order_comment
       @amount = amount
