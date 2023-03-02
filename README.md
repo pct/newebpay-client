@@ -1,6 +1,6 @@
 # Newebpay::Client (開發中)
 
-`newebpay-client` 是串接藍新金流 API 的 Ruby gem。
+`newebpay-client` 是串接藍新金流 API 的 rails gem。
 
 目前狀態為`開發中`，請優先使用別的 newebpay 相關 gem 來達到您的需求(比如文末的參考資料)。
 
@@ -9,16 +9,17 @@
 - [線上交易─幕前支付 API 2.0](https://www.newebpay.com/website/Page/content/download_api)
 - [捐款平台 API 1.1](https://donation.newebpay.com/Info/Help_center/download)
 
+## 註冊藍新帳號
+- [正式站] https://www.newebpay.com/
+- [測試站] https://cwww.newebpay.com/
+
 ## 安裝
-
 Gemfile：
-
 ```ruby
 gem 'newebpay-client'
 ```
 
 執行：
-
 ```bash
 $ bundle install
 ```
@@ -31,7 +32,7 @@ $ rails generate newebpay:install
 
 設定 `config/initializers/newebpay.rb`：
 
-```
+```yml
 - config.production_mode # 0: 開發環境 / 1: 正式站，預設為 0
 - config.marchant_id # 商店 ID
 - config.hash_key
@@ -72,14 +73,8 @@ The gem is available as open source under the terms of the [MIT License](https:/
 - 修改委託狀態 [NPA-B051] `/MPG/period/AlterStatus`
 - 修改委託內容 [NPA-B052] `/MPG/period/AlterAmt` (可更動委託金額)
 
-
 ### 捐款平台
 - 捐款平台
-
-
-## 註冊藍新帳號
-- [正式站] https://www.newebpay.com/
-- [測試站] https://cwww.newebpay.com/
 
 ## 參考資料
 
@@ -90,4 +85,3 @@ The gem is available as open source under the terms of the [MIT License](https:/
 - [cellvinchung/newebpay-rails](https://github.com/cellvinchung/newebpay-rails)
 - [calvertyang/spgateway](https://github.com/calvertyang/spgateway)
 - [ZneuRay/spgateway_rails](https://github.com/ZneuRay/spgateway_rails)
-
