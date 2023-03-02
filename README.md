@@ -82,6 +82,6 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 特別感謝這些相關套件：
 - [5xTraining/newebpay-turbo](https://github.com/5xTraining/newebpay-turbo) (最主要架構與程式碼，從這邊 clone 與改寫)
-- [cellvinchung/newebpay-rails](https://github.com/cellvinchung/newebpay-rails)
+- [cellvinchung/newebpay-rails](https://github.com/cellvinchung/newebpay-rails) (從這邊參考、邏輯檢查)
 - [calvertyang/spgateway](https://github.com/calvertyang/spgateway)
 - [ZneuRay/spgateway_rails](https://github.com/ZneuRay/spgateway_rails)

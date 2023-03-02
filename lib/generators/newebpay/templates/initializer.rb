@@ -20,7 +20,7 @@ Newebpay.configure do |config|
   config.respond_type = 'JSON'
 
   # Newebpay api version
-  config.version = '2.0'
+  # config.version = '2.0' # 目前不使用此一設定值，由 gem 決定，原因是藍新整個 API 有很多不同 version, 先不給 user 設定(以免 user 要設定每支 api version)
 
   # 0 = No login required for newebpay, 1 = Must login to newebpay
   config.login_type = 0

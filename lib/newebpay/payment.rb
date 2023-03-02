@@ -61,7 +61,7 @@ module Newebpay
         MerchantID: Config.options[:MerchantID], # 商店 ID
         TradeInfo: @aes_trade_info, # AES 加密過的 trade info
         TradeSha: @sha256_trade_info, # sha256 加密過的 trade info
-        Version: Config.options[:Version] # 藍新金流版本號
+        Version: '2.0' # 藍新金流版本號
       }
     end
 

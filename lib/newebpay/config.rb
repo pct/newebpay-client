@@ -56,7 +56,7 @@ module Newebpay
       HashKey: 'hash_key', # 商店專屬 HashKey
       HashIV: 'hash_iv', # 商店專屬 HashIV
       RespondType: 'respond_type', # 回傳格式 (JSON or String)，目前 gem 僅支援 JSON
-      Version: 'version', # 串接程式版本, 目前為 2.0
+      Version: 'version', # 串接程式版本, 目前為 2.0 (@TODO 但整個藍新 API 有很多版本，考慮移除這個設定值)
       LangType: 'lang_type', # 語系，可設定為 en/zh-tw/jp，預設為 zh-tw
       TradeLimit: 'trade_limit', # 交易有效時間(秒數)，介於 60-900 秒，如果設定為 0 或不設定，則為不啟用秒數限制
       ExpireDate: 'expire_date', # 繳費有效期限，預設為 7 天，格式為date('Ymd')，亦即 '20140620'；最大值為 180 天
