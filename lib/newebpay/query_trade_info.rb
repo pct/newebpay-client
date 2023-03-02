@@ -72,7 +72,7 @@ module Newebpay
 
     def set_check_value
       url_encoded_trade_info = URI.encode_www_form(@trade_info)
-      @check_value = @sha256_trade_info = SHA256::Cryptographic.new(url_encoded_trade_info).encrypt
+      @check_value = Digest::SHA256.hexdigest(url_encoded_trade_info).upcase
     end
   end
 end

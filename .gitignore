@@ -15,3 +15,6 @@
 *.swp
 .idea
 
+# 開發用
+rspec.sh
+
