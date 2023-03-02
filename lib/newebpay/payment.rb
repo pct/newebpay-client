@@ -52,7 +52,7 @@ module Newebpay
         MerchantOrderNo: @order_number, # 商店訂單編號，如：用途_日期時間戳記_流水號
         Amt: @amount.to_i, # 訂單金額
         ItemDesc: @product_description, # 商品資訊 (50 字內)
-        TimeStamp: Time.current.to_i.to_s, # 使用 Time.current (rails 設定的時區)
+        TimeStamp: Time.now.to_i.to_s,
         OrderComment: @order_comment, # 商店備註 (300字內，亦會在藍新頁面出現)
         Email: @email # 用戶的 Email
       }

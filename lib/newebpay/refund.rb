@@ -7,7 +7,7 @@ require_relative './SHA256/cryptographic'
 
 module Newebpay
   class Refund
-    attr_accessor :refund_info
+    attr_accessor :trade_info
     attr_reader :response
 
     def initialize(order_number: nil, amount: nil, cancel: false)
@@ -21,12 +21,13 @@ module Newebpay
       @order_number = order_number
       @amount = amount
       @cancel = cancel
-      set_refund_info
-      @post_data = AES::Cryptographic.new(url_encoded_refund_info).encrypt
+
+      set_trade_info
+      set_post_data
     end
 
     def request!
-      uri = URI("#{Config.api_base_url}/API/CreditCard/Close")
+      uri = URI("#{self.api_base_url}/API/CreditCard/Close")
       res = Net::HTTP.post_form(uri, MerchantID_: Config.options[:MerchantID], PostData_: @post_data)
       @response = JSON.parse(res.body)
     end
@@ -39,24 +40,25 @@ module Newebpay
 
     private
 
-    def url_encoded_refund_info
-      URI.encode_www_form(@refund_info)
-    end
-
-    def set_refund_info
-      @refund_info = {
+    def set_trade_info
+      @trade_info = {
         RespondType: 'JSON',
         Version: '1.1',
         MerchantOrderNo: @order_number,
         Amt: @amount.to_i,
-        TimeStamp: Time.current.to_i.to_s, # 使用 Time.current (rails 設定的時區)
+        TimeStamp: Time.now.to_i.to_s,
         IndexType: 1,
         CloseType: 2
       }
 
       return unless @cancel
 
-      @refund_info.merge!(Cancel: 1)
+      @trade_info.merge!(Cancel: 1)
+    end
+
+    def set_post_data
+      url_encoded_trade_info = URI.encode_www_form(@trade_info)
+      @post_data = AES::Cryptographic.new(url_encoded_trade_info).encrypt
     end
   end
 end
