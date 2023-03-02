@@ -6,7 +6,6 @@ Newebpay.configure do |configure|
   configure.merchant_id = ENV.fetch('MerchantID', nil)
   configure.hash_iv = ENV.fetch('HashIV', nil)
   configure.hash_key = ENV.fetch('HashKey', nil)
-  configure.version = ENV.fetch('Version', nil)
 end
 
 RSpec.configure do |config|
