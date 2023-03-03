@@ -28,7 +28,7 @@ module Newebpay
         email_modify: 1, # 於付款頁面，付款人電子信箱欄位是否開放讓付款人修改
         payment_info: 'Y', # 付款人填寫此委託時，是否需顯示付款人資訊填寫欄位
         order_info: 'N', # 付款人填寫此委託時，是否需顯示收件人資訊填寫欄位 (預設為 Y 要寫，但通常商城不用寫)
-        unionpay: 1, # 是否啟用銀聯卡支付方式
+        unionpay: 0, # 是否啟用銀聯卡支付方式
 
         # 客製回傳網址(同一個站有不同接收的 route 時使用)
         return_url: nil,
@@ -66,7 +66,7 @@ module Newebpay
           raise Newebpay::PaymentArgumentError, 'period_start_type 只有 1(立即執行十元授權), 2(立即執行委託金額授權), 3(不檢查信用卡資訊，不授權) 三種'
         end
 
-        unless period_times.length < 100
+        unless period_times < 100
           raise Newebpay::PaymentArgumentError, 'period_times 最多就 99 期，因為藍新欄位是 string(2)'
         end
         # === 欄位檢查結束 ===
@@ -101,7 +101,7 @@ module Newebpay
 
       # 測試用途
       def test_request!
-        uri = URI("#{self.api_base_url}/MPG/period")
+        uri = URI("#{Config.api_base_url}/MPG/period")
         res = Net::HTTP.post_form(uri, MerchantID_: Config.options[:MerchantID], PostData_: @post_data)
         @response = JSON.parse(res.body)
       end

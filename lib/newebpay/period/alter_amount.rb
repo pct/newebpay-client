@@ -42,7 +42,7 @@ module Newebpay
       end
 
       def request!
-        uri = URI("#{self.api_base_url}/MPG/period/AlterAmt")
+        uri = URI("#{Config.api_base_url}/MPG/period/AlterAmt")
         res = Net::HTTP.post_form(uri, MerchantID_: Config.options[:MerchantID], PostData_: @post_data)
         @response = JSON.parse(res.body)
       end

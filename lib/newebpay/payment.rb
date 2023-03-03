@@ -66,21 +66,21 @@ module Newebpay
     end
 
     # 測試有無藍新參數錯誤用
-    #def test_request!
-    #  uri = URI("#{Config.api_base_url}/MPG/mpg_gateway")
-    #  res = Net::HTTP.post_form(uri,
-    #    MerchantID: Config.options[:MerchantID],
-    #    TradeInfo: @aes_trade_info,
-    #    TradeSha: @sha256_trade_info,
-    #    Version: '2.0'
-    #  )
-    #  @response = JSON.parse(res.body)
-    #end
+    def test_request!
+      uri = URI("#{Config.api_base_url}/MPG/mpg_gateway")
+      res = Net::HTTP.post_form(uri,
+        MerchantID: Config.options[:MerchantID],
+        TradeInfo: @aes_trade_info,
+        TradeSha: @sha256_trade_info,
+        Version: '2.0'
+      )
+      @response = JSON.parse(res.body)
+    end
 
-    #def success?
-    #  return if @response.nil?
-    #  @response['Status'] == 'SUCCESS'
-    #end
+    def success?
+      return if @response.nil?
+      @response['Status'] == 'SUCCESS'
+    end
 
     private
 
