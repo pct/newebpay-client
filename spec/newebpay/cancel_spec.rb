@@ -1,5 +1,4 @@
-RSpec.describe 'Newebpay:Payment 付款' do
-  it "* 發票 api url" do
-    expect(Newebpay.api_base_url).to eq 'https://ccore.newebpay.com'
+RSpec.describe 'Newebpay::Cancel 取消信用卡授權' do
+  it "* 可取消信用卡授權" do
   end
 end

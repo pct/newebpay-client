@@ -1,4 +1,4 @@
-RSpec.describe 'Newebpay.Config 設定' do
+RSpec.describe 'Newebpay::Config 設定' do
   it "* 開發/正式站 API URL" do
     if Newebpay.production_mode == 0
       # 測試站

@@ -1,5 +1,4 @@
-RSpec.describe 'Newebpay:Payment 付款' do
-  it "* 發票 api url" do
-    expect(Newebpay.api_base_url).to eq 'https://ccore.newebpay.com'
+RSpec.describe 'Newebpay::Refund 退款' do
+  it "* 可發起退款，並在藍新後台看到退款" do
   end
 end

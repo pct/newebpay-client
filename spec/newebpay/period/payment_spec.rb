@@ -1,5 +1,4 @@
-RSpec.describe 'Newebpay:Payment 付款' do
-  it "* 發票 api url" do
-    expect(Newebpay.api_base_url).to eq 'https://ccore.newebpay.com'
+RSpec.describe 'Newebpay::Period::Payment 定期定額付款' do
+  it "* 發起信用卡定期定額付款" do
   end
 end

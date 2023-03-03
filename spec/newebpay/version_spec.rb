@@ -1,5 +1,5 @@
-RSpec.describe 'Newebpay:Payment 付款' do
-  it "* 發票 api url" do
-    expect(Newebpay.api_base_url).to eq 'https://ccore.newebpay.com'
+RSpec.describe 'Newebpay::Version 版本' do
+  it "* Gem 版本" do
+    expect(Newebpay::VERSION).to eq '0.1.0'
   end
 end
