@@ -56,18 +56,23 @@ module Newebpay
       @sha256_trade_info = SHA256::Cryptographic.new(@aes_trade_info).encrypt
     end
 
-    def required_parameters
-      {
-        MerchantID: Config.options[:MerchantID], # 商店 ID
-        TradeInfo: @aes_trade_info, # AES 加密過的 trade info
-        TradeSha: @sha256_trade_info, # sha256 加密過的 trade info
-        Version: '2.0' # 藍新金流版本號
-      }
-    end
+   #def required_parameters
+   #  {
+   #    MerchantID: Config.options[:MerchantID], # 商店 ID
+   #    TradeInfo: @aes_trade_info, # AES 加密過的 trade info
+   #    TradeSha: @sha256_trade_info, # sha256 加密過的 trade info
+   #    Version: '2.0' # 藍新金流版本號
+   #  }
+   #end
 
     def request!
       uri = URI("#{Config.api_base_url}/MPG/mpg_gateway")
-      res = Net::HTTP.post_form(uri, MerchantID_: Config.options[:MerchantID], PostData_: @post_data)
+      res = Net::HTTP.post_form(uri,
+        MerchantID: Config.options[:MerchantID],
+        TradeInfo: @aes_trade_info,
+        TradeSha: @sha256_trade_info,
+        Version: '2.0'
+      )
       @response = JSON.parse(res.body)
     end
 
