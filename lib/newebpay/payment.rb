@@ -56,7 +56,7 @@ module Newebpay
       @sha256_trade_info = SHA256::Cryptographic.new(@aes_trade_info).encrypt
     end
 
-    def gen_payment_params
+    def gen_mpg_payment_params
       {
         MerchantID: Config.options[:MerchantID], # 商店 ID
         TradeInfo: @aes_trade_info, # AES 加密過的 trade info
