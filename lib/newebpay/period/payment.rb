@@ -12,11 +12,6 @@ module Newebpay
       attr_reader :response
 
       def initialize(
-        # 必填客製網址(同一個站有不同接收的 route 時使用)
-        return_url: nil,
-        notify_url: nil,
-        back_url: nil,
-
         # 必填參數
         order_number: nil,
         product_description: '產品說明',
@@ -33,15 +28,16 @@ module Newebpay
         email_modify: 1, # 於付款頁面，付款人電子信箱欄位是否開放讓付款人修改
         payment_info: 'Y', # 付款人填寫此委託時，是否需顯示付款人資訊填寫欄位
         order_info: 'N', # 付款人填寫此委託時，是否需顯示收件人資訊填寫欄位 (預設為 Y 要寫，但通常商城不用寫)
-        unionpay: 1 # 是否啟用銀聯卡支付方式
+        unionpay: 1, # 是否啟用銀聯卡支付方式
+
+        # 客製回傳網址(同一個站有不同接收的 route 時使用)
+        return_url: nil,
+        notify_url: nil,
+        back_url: nil
       )
-        unless return_url && notify_url && back_url && order_number && period_amount && period_type && period_point && period_start_type && period_times && payer_email
+        unless order_number && period_amount && period_type && period_point && period_start_type && period_times && payer_email
           raise Newebpay::PaymentArgumentError,
             '請確認以下參數皆有填寫:
-            - return_url
-            - notify_url
-            - back_url
-
             - order_number
             - product_description
             - period_amount
@@ -50,16 +46,11 @@ module Newebpay
             - period_start_type
             - period_times
             - payer_email
-
             '
         end
 
         @key = Config.options[:HashKey]
         @iv = Config.options[:HashIV]
-
-        @return_url = return_url
-        @notify_url = notify_url
-        @back_url = back_url
 
         @order_number = order_number
         @product_description = product_description
@@ -76,6 +67,11 @@ module Newebpay
         @payment_info = payment_info
         @order_info =  order_info
         @unionpay = unionpay
+
+        # 回傳網址
+        @return_url = return_url
+        @notify_url = notify_url
+        @back_url = back_url
 
         set_trade_info
         set_post_data
@@ -97,11 +93,6 @@ module Newebpay
 
       def set_trade_info
         @trade_info = {
-          # 網址
-          ReturnURL: @return_url,
-          NotifyURL: @notify_url,
-          BackURL: @back_url,
-
           # 必填參數
           RespondType: 'JSON',
           TimeStamp: Time.now.to_i.to_s,
@@ -122,6 +113,11 @@ module Newebpay
           PaymentInfo: @payment_info, # 付款人填寫此委託時，是否需顯示付款人資訊填寫欄位
           OrderInfo: @order_info, # 付款人填寫此委託時，是否需顯示收件人資訊填寫欄位 (預設為 Y, 但考量一般網路購物不大需要，所以寫 N)
           UNIONPAY: @unionpay, # 是否啟用銀聯卡支付方式
+
+          # 回傳網址(留意，藍新金流不同 API 命名的 BackURL 沒有統一，要特別比對)
+          ReturnURL: @return_url,
+          NotifyURL: @notify_url,
+          BackURL: @back_url
         }
       end
 
