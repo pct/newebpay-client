@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require_relative 'config'
-require_relative 'errors'
-require_relative './AES/cryptographic'
-require_relative './SHA256/cryptographic'
+require_relative '../config'
+require_relative '../errors'
+require_relative '../AES/cryptographic'
+require_relative '../SHA256/cryptographic'
 
 module Newebpay
   module Period

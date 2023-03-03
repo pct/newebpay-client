@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require_relative 'config'
-require_relative 'errors'
-require_relative './AES/cryptographic'
-require_relative './SHA256/cryptographic'
+require_relative '../config'
+require_relative '../errors'
+require_relative '../AES/cryptographic'
+require_relative '../SHA256/cryptographic'
 
 module Newebpay
   module Period
@@ -49,6 +49,28 @@ module Newebpay
             '
         end
 
+        # === 欄位檢查開始 ===
+        unless period_amount > 0
+          raise Newebpay::PaymentArgumentError, 'period_amount 須 > 0'
+        end
+
+        unless %w"D W M Y".include?period_type
+          raise Newebpay::PaymentArgumentError, 'period_type 須為 D(日),W(週),M(月),Y(年) 四個英文字母'
+        end
+
+        unless period_point.length <= 4
+          raise Newebpay::PaymentArgumentError, 'period_point 須依據文件撰寫，不能 > 4 字元'
+        end
+
+        unless %w"1 2 3".include?period_start_type.to_s
+          raise Newebpay::PaymentArgumentError, 'period_start_type 只有 1(立即執行十元授權), 2(立即執行委託金額授權), 3(不檢查信用卡資訊，不授權) 三種'
+        end
+
+        unless period_times.length < 100
+          raise Newebpay::PaymentArgumentError, 'period_times 最多就 99 期，因為藍新欄位是 string(2)'
+        end
+        # === 欄位檢查結束 ===
+
         @key = Config.options[:HashKey]
         @iv = Config.options[:HashIV]
 
@@ -77,7 +99,8 @@ module Newebpay
         set_post_data
       end
 
-      def request!
+      # 測試用途
+      def test_request!
         uri = URI("#{self.api_base_url}/MPG/period")
         res = Net::HTTP.post_form(uri, MerchantID_: Config.options[:MerchantID], PostData_: @post_data)
         @response = JSON.parse(res.body)
