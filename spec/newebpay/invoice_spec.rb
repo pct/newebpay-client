@@ -1,5 +1,5 @@
 RSpec.describe 'Newebpay::Invoice 發票' do
-  it "* 發票" do
-    expect(Newebpay.api_base_url).to eq 'https://ccore.newebpay.com'
+  it "* 可取得發票資訊" do
+    expect(true).to eq(false)
   end
 end
