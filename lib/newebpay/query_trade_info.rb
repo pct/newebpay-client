@@ -60,7 +60,7 @@ module Newebpay
     private
 
     def set_trade_info
-      # 變數順序不能變，要作為 check_value
+      # 變數順序不能變，要作為 check_value：IV 在前、資料中間，Key 最後 (與 payment 需要的 check 寫法要 AES 再 SHA256 不同)
       @trade_info = {
         IV: Config.options[HashIV],
         Amt: @amount.to_i,
