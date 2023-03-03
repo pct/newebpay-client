@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'securerandom'
+
 # for mattr_accessor
 require 'active_support/core_ext/module/attribute_accessors'
 
@@ -104,6 +106,11 @@ module Newebpay
     def api_base_url
       self.production_mode ||= 0
       self.api_base_url = self.production_mode == 0 ? 'https://ccore.newebpay.com' : 'https://core.newebpay.com'
+    end
+
+    def create_order_number(prefix = nil)
+      order_prefix = prefix ? "#{prefix}_" : ''
+      order_number = "#{order_prefix}#{Time.now.strftime("%Y%m%d%H%M%S")}_#{SecureRandom.hex(2).upcase}"
     end
   end
 end
