@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require 'net/http'
+require 'json'
+
 require_relative 'config'
 require_relative 'errors'
 require_relative './AES/cryptographic'
@@ -63,7 +66,7 @@ module Newebpay
     end
 
     def request!
-      uri = URI("#{self.api_base_url}/MPG/mpg_gateway")
+      uri = URI("#{Config.api_base_url}/MPG/mpg_gateway")
       res = Net::HTTP.post_form(uri, MerchantID_: Config.options[:MerchantID], PostData_: @post_data)
       @response = JSON.parse(res.body)
     end

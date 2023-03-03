@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require 'net/http'
+require 'json'
+
 require_relative 'config'
 require_relative 'errors'
 require_relative './AES/cryptographic'
@@ -35,7 +38,7 @@ module Newebpay
     end
 
     def request!
-      uri = URI("#{self.api_base_url}/API/QueryTradeInfo")
+      uri = URI("#{Config.api_base_url}/API/QueryTradeInfo")
 
       res = Net::HTTP.post_form(uri,
         MerchantID: Config.options[:MerchantID], # 若要用複合式商店代號(MS5 開頭)，則[Gateway]參數為必填
