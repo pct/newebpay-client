@@ -56,31 +56,31 @@ module Newebpay
       @sha256_trade_info = SHA256::Cryptographic.new(@aes_trade_info).encrypt
     end
 
-   #def required_parameters
-   #  {
-   #    MerchantID: Config.options[:MerchantID], # 商店 ID
-   #    TradeInfo: @aes_trade_info, # AES 加密過的 trade info
-   #    TradeSha: @sha256_trade_info, # sha256 加密過的 trade info
-   #    Version: '2.0' # 藍新金流版本號
-   #  }
-   #end
-
-    def request!
-      uri = URI("#{Config.api_base_url}/MPG/mpg_gateway")
-      res = Net::HTTP.post_form(uri,
-        MerchantID: Config.options[:MerchantID],
-        TradeInfo: @aes_trade_info,
-        TradeSha: @sha256_trade_info,
-        Version: '2.0'
-      )
-      @response = JSON.parse(res.body)
+    def gen_payment_params
+      {
+        MerchantID: Config.options[:MerchantID], # 商店 ID
+        TradeInfo: @aes_trade_info, # AES 加密過的 trade info
+        TradeSha: @sha256_trade_info, # sha256 加密過的 trade info
+        Version: '2.0' # 藍新金流版本號
+      }
     end
 
-    def success?
-      return if @response.nil?
+    # 測試有無藍新參數錯誤用
+    #def test_request!
+    #  uri = URI("#{Config.api_base_url}/MPG/mpg_gateway")
+    #  res = Net::HTTP.post_form(uri,
+    #    MerchantID: Config.options[:MerchantID],
+    #    TradeInfo: @aes_trade_info,
+    #    TradeSha: @sha256_trade_info,
+    #    Version: '2.0'
+    #  )
+    #  @response = JSON.parse(res.body)
+    #end
 
-      @response['Status'] == 'SUCCESS'
-    end
+    #def success?
+    #  return if @response.nil?
+    #  @response['Status'] == 'SUCCESS'
+    #end
 
     private
 
@@ -99,6 +99,8 @@ module Newebpay
         TimeStamp: Time.now.to_i.to_s,
         OrderComment: @order_comment, # 商店備註 (300字內，亦會在藍新頁面出現)
         Email: @email, # 用戶的 Email
+        Version: '2.0', # 寫死 Version 2.0
+        RespondType: 'JSON',
 
         # 回傳網址
         ReturnURL: @return_url,

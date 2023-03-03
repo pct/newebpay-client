@@ -108,6 +108,14 @@ module Newebpay
       self.api_base_url = self.production_mode == 0 ? 'https://ccore.newebpay.com' : 'https://core.newebpay.com'
     end
 
+    def get_mpg_payment_url
+      "#{self.api_base_url}/MPG/mpg_gateway"
+    end
+
+    def get_period_payment_url
+      "#{self.api_base_url}/MPG/period"
+    end
+
     def create_order_number(prefix = nil)
       if prefix && prefix.length > 10
         raise ArgumentError, 'prefix 字數不得 > 10'
