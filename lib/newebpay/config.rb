@@ -109,6 +109,10 @@ module Newebpay
     end
 
     def create_order_number(prefix = nil)
+      if prefix && prefix.length > 10
+        raise ArgumentError, 'prefix 字數不得 > 10'
+      end
+
       order_prefix = prefix ? "#{prefix}_" : ''
       order_number = "#{order_prefix}#{Time.now.strftime("%Y%m%d%H%M%S")}_#{SecureRandom.hex(2).upcase}"
     end
