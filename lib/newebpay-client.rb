@@ -12,6 +12,7 @@ require 'newebpay/errors'
 require 'newebpay/period/payment'
 require 'newebpay/period/alter_amount'
 require 'newebpay/period/alter_status'
+require 'newebpay/period/response'
 
 module Newebpay
   extend Config

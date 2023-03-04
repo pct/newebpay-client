@@ -28,7 +28,7 @@ module Newebpay
         @key = Config.options[:HashKey]
         @iv = Config.options[:HashIV]
 
-        @order_number =  order_number
+        @order_number = order_number
         @period_no = period_no
         @alter_type = alter_type
 
@@ -37,7 +37,7 @@ module Newebpay
       end
 
       def request!
-        uri = URI("#{Config.api_base_url}/MPG/period")
+        uri = URI("#{Config.api_base_url}/MPG/period/AlterStatus")
         res = Net::HTTP.post_form(uri, MerchantID_: Config.options[:MerchantID], PostData_: @post_data)
         @response = JSON.parse(res.body)
       end
@@ -53,11 +53,11 @@ module Newebpay
       def set_trade_info
         @trade_info = {
           RespondType: 'JSON',
-          TimeStamp: Time.now.to_i.to_s,
           Version: '1.0',
           MerOrderNo: @order_number, # 商店自訂訂單編號，注意不是用 MerchantOrderNo
           PeriodNo: @period_no,
-          AlterType: @alter_type
+          AlterType: @alter_type,
+          TimeStamp: Time.now.to_i.to_s
         }
       end
 
