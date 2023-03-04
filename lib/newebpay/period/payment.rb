@@ -99,6 +99,13 @@ module Newebpay
         set_post_data
       end
 
+      def gen_period_payment_params
+        {
+          MerchantID_: Config.options[:MerchantID], # 商店 ID
+          PostData_: @post_data
+        }
+      end
+
       # 測試用途
       def test_request!
         uri = URI("#{Config.api_base_url}/MPG/period")

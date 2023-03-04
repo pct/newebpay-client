@@ -13,6 +13,11 @@
 - [正式站] https://www.newebpay.com/
 - [測試站] https://cwww.newebpay.com/
 
+## 信用卡卡號 for 測試
+- 4000-2211-1111-1111
+- 有效年月：大於今日
+- 末三碼：任意
+
 ## 安裝
 Gemfile：
 ```ruby

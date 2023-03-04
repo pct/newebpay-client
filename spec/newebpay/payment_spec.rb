@@ -10,6 +10,9 @@ RSpec.describe 'Newebpay::Payment 付款' do
 
     params = trade_info.gen_mpg_payment_params
 
+    puts Newebpay.get_mpg_payment_url
+    puts params
+
     it '* 測試商店 ID 有正確代入' do
       expect(params[:MerchantID]).to eq Newebpay.options[:MerchantID]
     end
