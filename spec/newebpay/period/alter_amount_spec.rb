@@ -2,7 +2,7 @@ RSpec.describe 'Newebpay::Period::AlterAmount 更改定期定額項目' do
   it "* 可更改價金 AlterAmt" do
     trade = Newebpay::Period::AlterAmount.new(
       order_number: 'SUB_20230304140012_7EF5',
-      period_no: '23030414083817190',
+      period_no: 'P230304140837MMwmxN',
       alter_amount: 5000,
       period_type: nil,
       period_point: nil,
@@ -19,7 +19,7 @@ RSpec.describe 'Newebpay::Period::AlterAmount 更改定期定額項目' do
   it "* 可更改週期 PeriodType + PeriodPoint" do
     trade = Newebpay::Period::AlterAmount.new(
       order_number: 'SUB_20230304140012_7EF5',
-      period_no: '23030414083817190',
+      period_no: 'P230304140837MMwmxN',
       alter_amount: 5000,
       period_type: 'M', # 週期改為月
       period_point: '04', # 配合週期改為月，把日期改為 每月 4 號扣款
@@ -36,7 +36,7 @@ RSpec.describe 'Newebpay::Period::AlterAmount 更改定期定額項目' do
   it "* 可更改授權期數 PeriodTimes" do
     trade = Newebpay::Period::AlterAmount.new(
       order_number: 'SUB_20230304140012_7EF5',
-      period_no: '23030414083817190',
+      period_no: 'P230304140837MMwmxN',
       alter_amount: nil,
       period_type: nil,
       period_point: nil,
@@ -53,7 +53,7 @@ RSpec.describe 'Newebpay::Period::AlterAmount 更改定期定額項目' do
   it "* 最後恢復原樣" do
     trade = Newebpay::Period::AlterAmount.new(
       order_number: 'SUB_20230304140012_7EF5',
-      period_no: '23030414083817190',
+      period_no: 'P230304140837MMwmxN',
       alter_amount: 4500,
       period_type: 'Y',
       period_point: '0304',
